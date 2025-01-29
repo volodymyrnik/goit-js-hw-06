@@ -11,7 +11,11 @@ class Storage {
     }
     removeItem(itemToRemove) {
         let idx = this.#items.indexOf(itemToRemove);
-        this.#items.splice(idx, 1);
+        if (idx !== -1) {
+            this.#items.splice(idx, 1);
+        } else {
+            console.log(`${itemToRemove} not found in the storage.`);
+        }
     }
 }
 
@@ -21,5 +25,5 @@ storage.addItem("Droid");
 console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
 storage.removeItem("Prolonger");
 console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
-
-console.log("-------------------------------------");
+storage.removeItem("NonexistentItem"); // "NonexistentItem not found in the storage."
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
